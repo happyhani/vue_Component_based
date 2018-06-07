@@ -7,26 +7,60 @@
     <title>水的体积</title>
 </head>
 <body>
+        // 有的不成功
+        //        int a[] = {2, 3, 4, 2, 2, 3, 3, 4}; //25
+        //        int a[] = {6, 9, 4, 3, 4, 7, 2, 3, 9, 4}; //73
+        //        int a[] = {2, 9, 6, 3, 2}; //13
+        //        int a[] = {5, 7, 7, 2, 5, 4, 6, 7, 0, 0 ,1}; //50
+        //        int a[] = {6, 9, 3, 1, 5, 6, 8, 4, 7, 1 ,4, 5}; //75
     <script>
-        var arr = [2,3,4,1,2,1,2,4];
-        let num = 0,
-            num1 = 0;
+        let arr = [6, 9, 3, 1, 5, 6, 8, 4, 7, 1 ,4, 5];
+        let num = 0;
         for(let i=0;i<arr.length-1;) {
-            i++;
             for(let j=i+1;j<arr.length;) {
-                j++;
-                if( arr[i]<=arr[j] && (j-i)==1 ) {
+                if(arr[i] <= arr[j] && (j-i)==1) {
                     num += arr[i] * (j-i);
                     break;
-                } else if(arr[i]>arr[j]) {
-
                 } else if(arr[i] <= arr[j] && (j-i)>1) {
                     num += arr[i] * (j-i)
-                    i = j+1;
-                }
+                    i = j-1;
+                    break;
+                } 
+                j++;
+            }
+            i++;
+        }
+        // 从后往前 只处理后一项小于前一项，且之前没有更大项时
+        for(let i=arr.length-1;i>0;) {
+            for(let j=i-1;j>=0;) {
+                if(arr[i] < arr[j] && (i-j)==1) {
+                    num += arr[i];
+                    break;
+                } else if(arr[i] < arr[j] && (i-j)>1) {
+                    num += arr[i] * (i-j);
+                    break;
+                } 
+                j--;
+            }
+            i--;
+            if(arr[i] > arr[i-1]) {
+                 // 正向已经处理过 直接结束整个循环，跳出
+                break;
             }
         }
         console.log(num)
+        /**
+         * 思路：
+         * 从前往后算：前小后大1,2,3   4,3,2,4,5
+         *    
+         * 从后往前算：后小前大 3,2,1  8,6,7
+         * 
+         * 改变思路 6-5：
+         * 从前往后算：前小后大1,2,3  前大后小时，获取剩下数中最大的。再继续剩下的计算
+         * 从后往前算：前小后大3,2,1  8,7,3,2,4时 4到7 7到8
+         * 前后分别只算前小后大
+         */
+
     </script>
 </body>
 </html>
