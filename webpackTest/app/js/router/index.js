@@ -1,7 +1,7 @@
 /*jslint es6 */
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "../home/index.vue";
+import Home from "../home/index";
 
 Vue.use(Router);
 
