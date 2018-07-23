@@ -75,10 +75,6 @@ module.exports = env => {
           'vue-style-loader',
           'css-loader'
         ]
-      },
-      {
-        test:/\.scss$/,
-        loader: 'style-loader!css-loader!sass-loader' // 串行解析从右向左解析
       }]
     },
     plugins: plugins,  // es6中直接plugins 即可

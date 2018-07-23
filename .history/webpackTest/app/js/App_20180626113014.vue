@@ -1,4 +1,4 @@
-<template>
+<template lang="html">
     <div id="app"> 
       <router-view></router-view>
     </div>
@@ -8,6 +8,6 @@
     name: 'app'
   }
 </script>
-<style lang="css">
+<style lang="scss">
   
 </style>

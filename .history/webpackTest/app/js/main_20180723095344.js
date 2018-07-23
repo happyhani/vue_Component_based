@@ -7,7 +7,7 @@ Vue.config.productionTip = false; //不是生产环境
 new Vue({
     el: '#app',
     router,
-    components: {
+    component: {
         App
     },
     template: "<App/>"

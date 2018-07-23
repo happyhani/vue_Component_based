@@ -44,7 +44,7 @@ module.exports = env => {
         loader: 'html-loader'
       },{
         test:/\.vue$/,
-        loader: 'vue-loader'
+        loader: 'vue-loader',
         // options: {
         //   cssModules: {
         //     localIdentName: '[path][name]---[local]---[hash:base64:5]',

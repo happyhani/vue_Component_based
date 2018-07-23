@@ -14,8 +14,7 @@ module.exports = env => {
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
       template: 'app/views/index.html'
-    }),
-    new VueLoaderPlugin()
+    })
   ]
   if(env.production){
     plugins.push(
@@ -44,39 +43,27 @@ module.exports = env => {
         loader: 'html-loader'
       },{
         test:/\.vue$/,
-        loader: 'vue-loader'
-        // options: {
-        //   cssModules: {
-        //     localIdentName: '[path][name]---[local]---[hash:base64:5]',
-        //     camelCase: true
-        //   },
-        //   loaders: env.production?{
-        //     css: ExtractTextPlugin.extract({
-        //       use: 'css-loader!px2rem-loader?remUni=75&remPrecision=8',
-        //       fallback: 'vue-style-loader' // <- 这是vue-loader的依赖，所以如果使用npm3，则不需要显式安装
-        //     }),
-        //     scss: ExtractTextPlugin.extract({
-        //       use: 'css-loader!px2rem-loader?remUni=75&remPrecision=8!sass-loader',
-        //       fallback: 'vue-style-loader' // <- 这是vue-loader的依赖，所以如果使用npm3，则不需要显式安装
-        //     })
-        //   }:{
-        //     css:'vue-style-loader!css-loader!px2rem-loader?remUni=75&remPrecision=8',
-        //     scss:'vue-style-loader!css-loader!px2rem-loader?remUni=75&remPrecision=8!sass-loader'
-        //   }
-        // }
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel-loader'
-      },
-      {
-        test: /\.css$/,
-        use: [
-          'vue-style-loader',
-          'css-loader'
-        ]
-      },
-      {
+        loader: 'vue-loader',
+        options: {
+          cssModules: {
+            localIdentName: '[path][name]---[local]---[hash:base64:5]',
+            camelCase: true
+          },
+          loaders: env.production?{
+            css: ExtractTextPlugin.extract({
+              use: 'css-loader!px2rem-loader?remUni=75&remPrecision=8',
+              fallback: 'vue-style-loader' // <- 这是vue-loader的依赖，所以如果使用npm3，则不需要显式安装
+            }),
+            scss: ExtractTextPlugin.extract({
+              use: 'css-loader!px2rem-loader?remUni=75&remPrecision=8!sass-loader',
+              fallback: 'vue-style-loader' // <- 这是vue-loader的依赖，所以如果使用npm3，则不需要显式安装
+            })
+          }:{
+            css:'vue-style-loader!css-loader!px2rem-loader?remUni=75&remPrecision=8',
+            scss:'vue-style-loader!css-loader!px2rem-loader?remUni=75&remPrecision=8!sass-loader'
+          }
+        }
+      },{
         test:/\.scss$/,
         loader: 'style-loader!css-loader!sass-loader' // 串行解析从右向左解析
       }]
