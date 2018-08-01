@@ -4,7 +4,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = env => {
   if(!env){ // 没有参数的时候要给env赋值，防止没有传参数的时候变量名取到的是undefined，不能是undefind.production
@@ -71,9 +71,40 @@ module.exports = env => {
         // }
         test:/\.vue$/,
         loader: 'vue-loader'
-      },{
-        test:/\.css$/,
-        loader: 'style-loader!css-loader' // 串行解析从右向左解析
+        // options: {
+        //   cssModules: {
+        //     localIdentName: '[path][name]---[local]---[hash:base64:5]',
+        //     camelCase: true
+        //   },
+        //   loaders: env.production?{
+        //     css: ExtractTextPlugin.extract({
+        //       use: 'css-loader!px2rem-loader?remUni=75&remPrecision=8',
+        //       fallback: 'vue-style-loader' // <- 这是vue-loader的依赖，所以如果使用npm3，则不需要显式安装
+        //     }),
+        //     scss: ExtractTextPlugin.extract({
+        //       use: 'css-loader!px2rem-loader?remUni=75&remPrecision=8!sass-loader',
+        //       fallback: 'vue-style-loader' // <- 这是vue-loader的依赖，所以如果使用npm3，则不需要显式安装
+        //     })
+        //   }:{
+        //     css:'vue-style-loader!css-loader!px2rem-loader?remUni=75&remPrecision=8',
+        //     scss:'vue-style-loader!css-loader!px2rem-loader?remUni=75&remPrecision=8!sass-loader'
+        //   }
+        // }
+      },
+      {
+        test: /\.js$/,
+        loader: 'babel-loader'
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'vue-style-loader',
+          'css-loader'
+        ]
+      },
+      {
+        test:/\.scss$/,
+        loader: 'style-loader!css-loader!sass-loader' // 串行解析从右向左解析
       }]
     },
     plugins: plugins,  // es6中直接plugins 即可
