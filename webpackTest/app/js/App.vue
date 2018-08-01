@@ -8,6 +8,6 @@
     name: 'app'
   }
 </script>
-<style lang="scss">
+<style lang="css">
   
 </style>

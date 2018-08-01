@@ -8,9 +8,6 @@
 
   }
 </script>
-<style lang="scss">
-  .home {
-    color: red;
-    font-size: 80px;
-  }
+<style lang="css">
+
 </style>
